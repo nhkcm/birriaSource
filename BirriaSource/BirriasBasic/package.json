@@ -1,0 +1,12 @@
+{
+  "name": "birrias-basic",
+  "version": "0.0.0",
+  "description": "BirriasBasic",
+  "main": "server.js",
+  "author": {
+    "name": "Jose Fragozo"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
