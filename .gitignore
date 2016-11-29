@@ -243,3 +243,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/BirriaSource/BirriaSource.sln
+/BirriaSource/BirriaSource/BirriaSource.njsproj
