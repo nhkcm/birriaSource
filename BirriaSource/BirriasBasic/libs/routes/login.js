@@ -8,13 +8,38 @@ exports.hello = function (req, res) {
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/all', function (req, res) {
     clientes.list(function (rows) {
         res.send(JSON.stringify(rows));
-    });
-    //res.send("hola mundo desde routes");
+    });    
 });
-
+//////////////////////////////////////////////
+//>                info
+//////////////////////////////////////////////
+router.get('/register/info', function (req, res) {
+    res.send(JSON.stringify({
+        "new_user":
+        [
+            "correo",
+            "password",
+            "nombre",
+            "apellido",
+            "telefono",
+        ]
+    }));
+});
+router.get('/info', function (req, res) {
+    res.send(JSON.stringify({
+        "user":
+        [
+            "correo",
+            "password",
+        ]
+    }));
+});
+//////////////////////////////////////////////
+//>                rest
+//////////////////////////////////////////////
 router.post('/register', function (req, res) {
     var data = req.body.new_user;
     validator.validate_user_register(data, function () {
@@ -34,22 +59,31 @@ router.post('/register', function (req, res) {
         res.send("tenemos un problema: " + err);
     });
 });
-router.get('/register/info', function (req, res) {
-    res.send(JSON.stringify({
-        "new_user":
-        [
-            "correo",
-            "password",
-            "nombre",
-            "apellido",
-            "telefono",
-        ]
-    }));
+router.post('/', function (req, res) {
+    
+    var user = req.body.user;
+    console.log(user);
+    validator.validate_store_user(user, function (err, store_user) {
+        //>retorna el error si sale con error.
+        if (err) { r.send(err); return; }
+        //>retorna el store_user
+        delete (store_user.password);
+        res.send(JSON.stringify(store_user));
+    });
 });
+router.post('/photo', function (req, res) 
+    
+    if (!req.files) {
+        res.send('No files were uploaded.');
+        return;
+    }
 
-router.get('/hello', function (req, res) {
-    clientes.exist_user("user1", function (r) {
-        res.send(JSON.stringify(r));
+    res.send("nothing");
+});
+router.post('/validate', function (req, res) {
+    var token = req.body.token;    
+    validator.validate_token(token, function (info) {
+        res.send(info);
     });
 });
 

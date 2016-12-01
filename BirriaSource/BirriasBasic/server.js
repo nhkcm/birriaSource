@@ -1,6 +1,6 @@
 ﻿
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var login = require('./libs/routes/login');
 var http = require('http');
 var port = 1337;

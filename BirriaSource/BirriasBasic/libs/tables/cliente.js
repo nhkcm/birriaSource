@@ -6,13 +6,7 @@ var queryAll = 'SELECT * FROM db_birria.clientes;';
 var existUserName = "SELECT count(*) as contador FROM db_birria.clientes where user = '@username'";
 
 exports.list = function (callback) {
-    var swi = new Date().getTime();
-    cnn.query(query1, function (err, rows, fields) {
-        //parsear antes de mandar;
-        var swf = new Date().getTime();
-        console.log(swf - swi);
-        callback(rows);
-    });
+    base.all("clientes", callback);
 }
 
 exports.add = function (row, callback) {
